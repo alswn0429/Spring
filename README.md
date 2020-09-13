@@ -1,2 +1,2 @@
-# Spring
+# Spring Framework
 스프링에 대해 공부해볼까요~??~?~?~?
