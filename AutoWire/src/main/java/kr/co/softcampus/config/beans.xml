@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+						
+	
+	<bean id='obj1' class='kr.co.softcampus.beans.TestBean1'>
+		<property name="data1" ref="data_bean1"></property>
+		<property name="data2" ref="data_bean1"></property>
+	</bean>
+	
+	<bean id="data_bean1" class="kr.co.softcampus.beans.DataBean1" scope="prototype"/>
+
+	<bean id="obj2" class="kr.co.softcampus.beans.TestBean1" autowire="byName"/>
+	
+	<bean id='data1' class='kr.co.softcampus.beans.DataBean1'/>
+	<bean id='data2' class='kr.co.softcampus.beans.DataBean1'/>
+	
+	<bean id='obj3' class='kr.co.softcampus.beans.TestBean2' autowire='byType'/>
+	<!-- autowire='byType'일 때, 동일한 타입의 빈이 2개 이상 정의되어있으면 오류!!! -->
+	<!-- 동일한 타입이 여러개면 byType말고 byName으로 하세용 -->
+	<bean id='data_bean2' class='kr.co.softcampus.beans.DataBean2'/>
+	<!-- <bean class='kr.co.softcampus.beans.DataBean2'/> -->
+	
+	<bean id='obj4' class='kr.co.softcampus.beans.TestBean3'>
+		<constructor-arg ref='data_bean2' index='0'></constructor-arg>
+		<constructor-arg ref='data_bean2' index='1'></constructor-arg>
+	</bean>
+	
+	<bean id='obj5' class='kr.co.softcampus.beans.TestBean3' autowire='constructor'/>
+	
+	<bean id='obj6' class='kr.co.softcampus.beans.TestBean3'>
+		<constructor-arg value='100' index='0' type='int'></constructor-arg>
+		<constructor-arg value='hello' index='1'></constructor-arg>
+		<constructor-arg ref='data_bean2' index='2'></constructor-arg>
+		<constructor-arg ref='data_bean2' index='3'></constructor-arg>
+	</bean>
+
+	<bean id='obj7' class='kr.co.softcampus.beans.TestBean3' autowire='constructor'>
+		<constructor-arg value='200' index='0' type='int'></constructor-arg>
+		<constructor-arg value='hi' index='1'></constructor-arg>
+	</bean>
+	
+	<!-- autowire안써놓으면 맨 위에 beans 설정에 default-autowire='byName'의 설정에 따라서 자동주입 -->
+	<bean id='obj8' class='kr.co.softcampus.beans.TestBean1'/>
+	
+	<!-- autowire='no' : default-autowire='byName' 설정 안함! -->
+	<bean id='obj9' class='kr.co.softcampus.beans.TestBean1' autowire='no'/>
+</beans>
