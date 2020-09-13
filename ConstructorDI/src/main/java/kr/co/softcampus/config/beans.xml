@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id='obj1' class='kr.co.softcampus.beans.TestBean' lazy-init='true'/> 
+	
+	<bean id='obj2' class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<!-- value : 매개변수에 값 주입 -->
+		<!-- type : int, double, float등은 type으로 속성을 지정해줘야해! -->
+		<constructor-arg value='100' type="int"></constructor-arg>
+	</bean>
+	
+	<bean id='obj3' class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='11.11' type="double"></constructor-arg>
+	</bean>
+	
+	<bean id="obj4" class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<constructor-arg value="문자열"></constructor-arg>
+	</bean>
+	
+	<bean id='obj5' class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='200' type='int'></constructor-arg>
+		<constructor-arg value='22.22' type='double'></constructor-arg>
+		<constructor-arg value='안녕하세요' type='java.lang.String'></constructor-arg>
+	</bean>
+	
+	<!-- 매개변수의 순서와는 상관없이 다 쓸 수 있는 생성자를 찾아서 호출! -->
+	<bean id='obj6' class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<constructor-arg value="반갑습니다"></constructor-arg>
+		<constructor-arg value="300" type="int"></constructor-arg>
+		<constructor-arg value="33.33" type='double'></constructor-arg>
+	</bean>
+	
+	<!-- index : 매개변수 주입 순서 정해줌! -->
+	<bean id='obj7' class='kr.co.softcampus.beans.TestBean' lazy-init='true'>
+		<constructor-arg value="44.44" type="double" index='1'></constructor-arg>
+		<constructor-arg value="44" type="int" index='0'></constructor-arg>
+		<constructor-arg value="안녕하세요" index='2'></constructor-arg>
+	</bean>
+	
+	<bean id='obj8' class='kr.co.softcampus.beans.TestBean2' lazy-init='true'>
+		<constructor-arg>
+			<!-- 첫번째 매개변수 -->
+			<bean class='kr.co.softcampus.beans.DataBean'/>
+		</constructor-arg>
+		<constructor-arg>
+			<!-- 두번째 매개변수 -->
+			<bean class='kr.co.softcampus.beans.DataBean'/>
+		</constructor-arg>
+	</bean>
+	
+	<!-- prototype으로 생성자 만들때마다 객체 생성 -->
+	<bean id='data_bean' class='kr.co.softcampus.beans.DataBean' scope='prototype'/>
+	
+	<!-- data_bean으로 만든 객체를 순서대로 주입 -->
+	<bean id='obj9' class='kr.co.softcampus.beans.TestBean2' lazy-init='true'>
+		<constructor-arg ref='data_bean'></constructor-arg>
+		<constructor-arg ref='data_bean'></constructor-arg>
+	</bean> 
+		
+</beans>
