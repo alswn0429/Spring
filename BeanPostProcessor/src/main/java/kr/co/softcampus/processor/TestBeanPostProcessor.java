@@ -1,0 +1,31 @@
+package kr.co.softcampus.processor;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+
+public class TestBeanPostProcessor implements BeanPostProcessor{
+
+	//init-method호출 전
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		// TODO Auto-generated method stub
+	System.out.println("before");
+		switch(beanName) {
+		case "t1" :
+			System.out.println("id가 t1인 bean객체 생성");
+			break;
+		case "t2" :
+			System.out.println("id가 t2인 bean객체 생성");
+			break;
+		}
+		//bean객체의 주소값 반환
+		return bean;
+	}
+	
+	//init-method호출 후
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		// TODO Auto-generated method stub
+		System.out.println("after");
+		return bean;
+	}
+}
+ 
