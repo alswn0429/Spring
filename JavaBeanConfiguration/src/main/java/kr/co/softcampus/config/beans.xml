@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Singleton -->
+	<bean id='xml1' class='kr.co.softcampus.beans.TestBean1'/>
+	
+	<!-- lazy-init : getBean()메서드를 호출할때 객체 생성 -->
+	<bean id='xml2' class='kr.co.softcampus.beans.TestBean2' lazy-init='true'/>	
+	
+	<!-- xml로딩 시 객체 생성 안됌 getBean할때마다 새로운 객체를 생성 -->
+	<bean id='xml3' class='kr.co.softcampus.beans.TestBean3' scope='prototype'/>
+
+	<!-- id가 없는 빈 : 같은 클래스를 참조하는 빈이 아니면 id값 지정안하고 클래스만 써도 돼 -->
+	<!-- 똑같은 클래스타입의 빈이 여러개 정의되어있을 때 primary값을 준 bean을 호출 -->
+	<bean class='kr.co.softcampus.beans.TestBean4'/> 
+	<bean class='kr.co.softcampus.beans.TestBean4' primary='true'/> 
+</beans>
